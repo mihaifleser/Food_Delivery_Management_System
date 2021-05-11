@@ -1,4 +1,39 @@
 package Business;
 
-public class CompositeProduct {
+import java.util.ArrayList;
+
+public class CompositeProduct extends MenuItem {
+
+    private ArrayList<MenuItem> products;
+
+    public CompositeProduct(String title)
+    {
+        super(title,0f,0,0,0,0,0);
+        products = new ArrayList<>();
+    }
+    public void addBaseProduct(BaseProduct baseProduct)
+    {
+        products.add(baseProduct);
+        this.rating += baseProduct.getRating();
+        this.calories += baseProduct.getCalories();
+        this.proteins += baseProduct.getProteins();
+        this.fat += baseProduct.getFat();
+        this.sodium += baseProduct.getSodium();
+        this.price += baseProduct.computePrice();
+    }
+
+    @Override
+    public Integer computePrice() {
+        Integer price = 0;
+        for (MenuItem baseProduct: products) {
+            price += baseProduct.computePrice();
+        }
+        return price;
+    }
+
+    public ArrayList<MenuItem> getProducts()
+    {
+        return products;
+    }
+
 }
