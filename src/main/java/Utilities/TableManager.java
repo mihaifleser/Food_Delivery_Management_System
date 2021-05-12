@@ -17,12 +17,10 @@ public class TableManager {
         this.deliveryService = deliveryService;
     }
 
-    public void importDataIntoTable(JTable table)
+    private void insertDataIntoTable(JTable table, ArrayList<MenuItem> data)
     {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
-        deliveryService.importProducts();
-        ArrayList<MenuItem> data = deliveryService.getMenuItems();
         for (MenuItem menu: data)
         {
             List<String> row = new ArrayList<>();
@@ -37,4 +35,18 @@ public class TableManager {
             model.addRow(row.toArray());
         }
     }
+
+    public void importDataIntoTable(JTable table)
+    {
+        deliveryService.importProducts();
+        ArrayList<MenuItem> data = deliveryService.getMenuItems();
+        insertDataIntoTable(table,data);
+    }
+
+    public void updateTable(JTable table)
+    {
+        ArrayList<MenuItem> data = deliveryService.getMenuItems();
+        insertDataIntoTable(table,data);
+    }
+
 }

@@ -13,9 +13,6 @@ public class DeliveryService implements IDeliveryServiceProcessing{
         menuItems = new ArrayList<>();
     }
 
-
-
-
     @Override
     public void importProducts() {
         menuItems = CSVReader.readData();
@@ -26,17 +23,33 @@ public class DeliveryService implements IDeliveryServiceProcessing{
     }
 
     @Override
-    public void addProduct() {
-
+    public void addProduct(MenuItem newItem) {
+        menuItems.add(newItem);
     }
 
     @Override
-    public void editProduct() {
+    public void editProduct(String title, Float rating, Integer calories, Integer proteins, Integer fat, Integer sodium, Integer price) {
+        MenuItem item = getItemWithTitle(title);
+        item.setRating(rating);
+        item.setCalories(calories);
+        item.setProteins(proteins);
+        item.setFat(fat);
+        item.setSodium(sodium);
+        item.setPrice(price);
+    }
 
+    public MenuItem getItemWithTitle(String title)
+    {
+        for(MenuItem item: menuItems)
+        {
+            if(item.getTitle().equals(title))
+                return item;
+        }
+        return null;
     }
 
     @Override
-    public void deleteProduct() {
-
+    public void deleteProduct(String title) {
+        menuItems.remove(getItemWithTitle(title));
     }
 }

@@ -30,6 +30,26 @@ public class AdminGUI{
         return importButton;
     }
 
+    public JButton getAddButton()
+    {
+        return addButton;
+    }
+
+    public JButton getDeleteButton()
+    {
+        return deleteButton;
+    }
+
+    public JButton getEditButton()
+    {
+        return editButton;
+    }
+
+    public JButton getComposeButton()
+    {
+        return composeButton;
+    }
+
     public void initialise()
     {
         Color frameColor = Color.decode("#4ECDC4");
