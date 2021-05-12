@@ -1,7 +1,9 @@
 package Presentation;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.lang.reflect.Field;
 
 public class AdminGUI{
 
@@ -13,6 +15,20 @@ public class AdminGUI{
     private JButton editButton;
     private JButton composeButton;
 
+    private JTable productsTable = new JTable(new DefaultTableModel(){@Override
+    public boolean isCellEditable(int row, int col) {
+        return col != 0;
+    }});
+
+    public JTable getProductsTable()
+    {
+        return productsTable;
+    }
+
+    public JButton getImportButton()
+    {
+        return importButton;
+    }
 
     public void initialise()
     {
@@ -67,6 +83,16 @@ public class AdminGUI{
         composeButton.setForeground(Color.white);
         frame.add(composeButton);
 
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
+        String[] columnNames = { "Title", "Rating", "Calories", "Proteins", "Fat", "Sodium", "Price" };
+        for (String str: columnNames)
+        {
+            model.addColumn(str);
+        }
+
+        JScrollPane sp2 = new JScrollPane(productsTable);
+        sp2.setBounds(importButton.getX() + labelWidth,importButton.getY(),700,500);
+        frame.add(sp2);
 
         frame.setLayout(null);
         frame.getContentPane().setBackground(frameColor);

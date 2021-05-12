@@ -1,5 +1,6 @@
 import Business.BaseProduct;
 import Business.CompositeProduct;
+import Business.DeliveryService;
 import Business.MenuItem;
 import Presentation.Controller;
 import java.util.ArrayList;
@@ -12,15 +13,20 @@ public class App {
 
 
         CompositeProduct a = new CompositeProduct("Salut");
-        BaseProduct b = new BaseProduct("BBB",12f,23,43,54,32,43);
+        BaseProduct b = new BaseProduct("BBB",8f,23,43,54,32,43);
         BaseProduct c = new BaseProduct("CCC",12f,23,43,54,32,12);
-        a.addBaseProduct(b);
-        a.addBaseProduct(c);
+        a.addMenuProduct(b);
+        a.addMenuProduct(c);
         MenuItem menuItem = a;
 
-        System.out.println((menuItem).computePrice());
+        System.out.println(menuItem.computePrice());
+        System.out.println(menuItem.getRating());
         ArrayList<MenuItem> products = ((CompositeProduct)menuItem).getProducts();
         System.out.println(products.get(0).getTitle());
+
+
+        DeliveryService deliveryService = new DeliveryService();
+        deliveryService.importProducts();
 
     }
 }

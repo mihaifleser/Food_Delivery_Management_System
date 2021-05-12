@@ -77,5 +77,17 @@ public abstract class MenuItem {
         this.price = price;
     }
 
+
+    @Override
+    public boolean equals(Object other){
+        return title.equals(((MenuItem)other).getTitle());
+    }
+
+    @Override
+    public int hashCode() {
+        return title.hashCode();
+    }
+
+
     public abstract Integer computePrice();
 }
