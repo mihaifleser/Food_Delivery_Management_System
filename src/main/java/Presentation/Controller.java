@@ -1,6 +1,7 @@
 package Presentation;
 
 import Business.BaseProduct;
+import Business.CompositeProduct;
 import Business.DeliveryService;
 import Business.MenuItem;
 import Utilities.TableManager;
@@ -72,6 +73,37 @@ public class Controller {
         }
     }
 
+    private void composeNewMenu()
+    {
+            int[] rows = adminGUI.getProductsTable().getSelectedRows();
+            int col = 0;
+            String title = adminGUI.getNewMenuTitle();
+            if(deliveryService.getItemWithTitle(title) == null)
+            {
+                CompositeProduct newMenu = new CompositeProduct(title);
+                for(int a: rows)
+                {
+                    String productTitle = adminGUI.getProductsTable().getModel().getValueAt(a, 0).toString();
+                    Float rating =Float.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 1).toString());
+                    Integer calories = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 2).toString());
+                    Integer proteins = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 3).toString());
+                    Integer fat = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 4).toString());
+                    Integer sodium = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 5).toString());
+                    Integer price = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 6).toString());
+                    newMenu.addMenuProduct(new BaseProduct(productTitle,rating,calories,proteins,fat,sodium,price));
+                }
+                deliveryService.addProduct(newMenu);
+                tableManager.updateTable(adminGUI.getProductsTable());
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(new JFrame(), "Product already present!");
+            }
+
+    }
+
+
+
     private void editSelectedProducts()
     {
         try {
@@ -108,5 +140,6 @@ public class Controller {
         addProductGUI.getAddButton().addActionListener(e -> addProduct());
         adminGUI.getDeleteButton().addActionListener(e->deleteSelectedProducts());
         adminGUI.getEditButton().addActionListener(e->editSelectedProducts());
+        adminGUI.getComposeButton().addActionListener(e-> composeNewMenu());
     }
 }

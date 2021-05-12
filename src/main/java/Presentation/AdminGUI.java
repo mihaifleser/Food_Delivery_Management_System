@@ -14,6 +14,7 @@ public class AdminGUI{
     private JButton deleteButton;
     private JButton editButton;
     private JButton composeButton;
+    private JTextArea newMenu;
 
     private JTable productsTable = new JTable(new DefaultTableModel(){@Override
     public boolean isCellEditable(int row, int col) {
@@ -23,6 +24,11 @@ public class AdminGUI{
     public JTable getProductsTable()
     {
         return productsTable;
+    }
+
+    public String getNewMenuTitle()
+    {
+        return newMenu.getText();
     }
 
     public JButton getImportButton()
@@ -98,7 +104,7 @@ public class AdminGUI{
 
         composeButton = new JButton("Compose Menu");
         composeButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 20));
-        composeButton.setBounds(leftMargin, buttonHeight * 5,buttonWidth,buttonHeight);
+        composeButton.setBounds(leftMargin, buttonHeight * 6,buttonWidth,buttonHeight);
         composeButton.setBackground(buttonColor);
         composeButton.setForeground(Color.white);
         frame.add(composeButton);
@@ -113,6 +119,12 @@ public class AdminGUI{
         JScrollPane sp2 = new JScrollPane(productsTable);
         sp2.setBounds(importButton.getX() + labelWidth,importButton.getY(),700,500);
         frame.add(sp2);
+
+        newMenu = new JTextArea();
+        newMenu.setFont(new Font(Font.SERIF,  Font.PLAIN, 17));
+        newMenu.setBounds(composeButton.getX(), composeButton.getY() + buttonHeight,buttonWidth,labelHeight - labelHeight / 3);
+        newMenu.setText("New Menu");
+        frame.add(newMenu);
 
         frame.setLayout(null);
         frame.getContentPane().setBackground(frameColor);
