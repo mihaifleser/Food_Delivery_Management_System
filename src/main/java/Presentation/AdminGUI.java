@@ -16,10 +16,12 @@ public class AdminGUI{
     private JButton composeButton;
     private JTextArea newMenu;
 
-    private JTable productsTable = new JTable(new DefaultTableModel(){@Override
-    public boolean isCellEditable(int row, int col) {
-        return col != 0;
-    }});
+    private JTable productsTable = new JTable();
+
+    public JFrame getFrame()
+    {
+        return frame;
+    }
 
     public JTable getProductsTable()
     {

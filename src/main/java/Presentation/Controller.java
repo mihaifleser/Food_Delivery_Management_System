@@ -1,9 +1,6 @@
 package Presentation;
 
-import Business.BaseProduct;
-import Business.CompositeProduct;
-import Business.DeliveryService;
-import Business.MenuItem;
+import Business.*;
 import Utilities.TableManager;
 
 import javax.swing.*;
@@ -102,7 +99,52 @@ public class Controller {
 
     }
 
+    private void registerAccount()
+    {
+        String email = clientGUI.getUserEmail();
+        String password = clientGUI.getUserPassword();
 
+        if(deliveryService.getAccountWithEmail(email) != null)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Account already exists!");
+        }
+        else
+        {
+            deliveryService.addAccount(new Account(email,password));
+            JOptionPane.showMessageDialog(new JFrame(), "Account created!");
+        }
+    }
+
+    private void logIn()
+    {
+        String email = clientGUI.getUserEmail();
+        String password = clientGUI.getUserPassword();
+        if(deliveryService.getAccountWithEmail(email) != null)
+        {
+            deliveryService.logIn(email, password);
+            clientGUI.getRegisterButton().setEnabled(false);
+            clientGUI.getLoginButton().setEnabled(false);
+            clientGUI.getPasswordTextArea().setEnabled(false);
+            clientGUI.getEmailTextArea().setEnabled(false);
+            clientGUI.getAccountLabel().setText(deliveryService.getLoggedInAccount().getEmail());
+            clientGUI.getLogOut().setEnabled(true);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "Account does not exists!");
+        }
+    }
+
+    private void logOut()
+    {
+        deliveryService.logOut();
+        clientGUI.getRegisterButton().setEnabled(true);
+        clientGUI.getLoginButton().setEnabled(true);
+        clientGUI.getPasswordTextArea().setEnabled(true);
+        clientGUI.getEmailTextArea().setEnabled(true);
+        clientGUI.getAccountLabel().setText("");
+        clientGUI.getLogOut().setEnabled(false);
+    }
 
     private void editSelectedProducts()
     {
@@ -117,7 +159,7 @@ public class Controller {
                 Integer fat = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 4).toString());;
                 Integer sodium = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 5).toString());;
                 Integer price = Integer.valueOf(adminGUI.getProductsTable().getModel().getValueAt(a, 6).toString());;
-                deliveryService.editProduct(title,rating,calories,proteins,fat,sodium,price);
+                deliveryService.editProduct(a, title,rating,calories,proteins,fat,sodium,price);
             }
             tableManager.updateTable(adminGUI.getProductsTable());
 
@@ -133,13 +175,26 @@ public class Controller {
         adminGUI.initialise();
         clientGUI.initialise();
         employeeGUI.initialise();
-
+        deliveryService.importSerialisedProducts();
+        deliveryService.importSerialisedAccounts();
+        tableManager.updateTable(adminGUI.getProductsTable());
 
         adminGUI.getImportButton().addActionListener(e -> tableManager.importDataIntoTable(adminGUI.getProductsTable()));
+        adminGUI.getFrame().addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                deliveryService.exportAccounts();
+                deliveryService.exportProducts();
+            }
+        });
         adminGUI.getAddButton().addActionListener((e -> addProductGUI.initialise()));
         addProductGUI.getAddButton().addActionListener(e -> addProduct());
         adminGUI.getDeleteButton().addActionListener(e->deleteSelectedProducts());
         adminGUI.getEditButton().addActionListener(e->editSelectedProducts());
         adminGUI.getComposeButton().addActionListener(e-> composeNewMenu());
+        clientGUI.getRegisterButton().addActionListener(e-> registerAccount());
+        clientGUI.getLoginButton().addActionListener(e->logIn());
+        clientGUI.getLogOut().addActionListener(e -> logOut());
     }
 }

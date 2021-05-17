@@ -10,6 +10,44 @@ public class ClientGUI {
     private JTextArea passwordText;
     private JButton loginButton;
     private JButton registerButton;
+    private JLabel accountLabel;
+    private JButton logOut;
+
+    public JButton getLogOut()
+    {
+        return logOut;
+    }
+    public JLabel getAccountLabel() {
+        return accountLabel;
+    }
+
+    public String getUserEmail()
+    {
+        return emailText.getText();
+    }
+
+    public JTextArea getEmailTextArea()
+    {
+        return emailText;
+    }
+    public JTextArea getPasswordTextArea()
+    {
+        return passwordText;
+    }
+    public String getUserPassword()
+    {
+        return passwordText.getText();
+    }
+
+    public JButton getLoginButton()
+    {
+        return loginButton;
+    }
+
+    public JButton getRegisterButton()
+    {
+        return registerButton;
+    }
 
     public void initialise()
     {
@@ -22,12 +60,16 @@ public class ClientGUI {
         int buttonWidth = width / 8;
         int buttonHeight = height / 16;
         frame=new JFrame("Client");//creating instance of JFrame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel titleLabel1 = new JLabel("Client GUI");
         titleLabel1.setFont(new Font(Font.SERIF,  Font.BOLD, 22));
         titleLabel1.setBounds(labelWidth + labelWidth / 2, 0,labelWidth,labelHeight);
         frame.add(titleLabel1);
+
+        accountLabel = new JLabel("");
+        accountLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
+        accountLabel.setBounds(leftMargin, labelHeight,buttonWidth,labelHeight);
+        frame.add(accountLabel);
 
         JLabel emailLabel = new JLabel("Email: ");
         emailLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
@@ -62,6 +104,14 @@ public class ClientGUI {
         registerButton.setBackground(buttonColor);
         registerButton.setForeground(Color.white);
         frame.add(registerButton);
+
+        logOut = new JButton("Log Out");
+        logOut.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        logOut.setBounds(leftMargin + buttonWidth, labelHeight,buttonWidth,buttonHeight);
+        logOut.setBackground(buttonColor);
+        logOut.setForeground(Color.white);
+        frame.add(logOut);
+        logOut.setEnabled(false);
 
 
         frame.setLayout(null);

@@ -1,4 +1,45 @@
 package DataLayer;
 
-public class Serializator {
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Objects;
+
+public class Serializator <T> {
+
+    public void serialize(ArrayList<T> array, String type)
+    {
+        try {
+            FileOutputStream file = new FileOutputStream("ProgramData/" + type + ".txt");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            out.writeObject(array);
+            out.close();
+            file.close();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<T> deserialize(String type)
+    {
+        ArrayList<T> result = new ArrayList<>();
+        try
+        {
+            FileInputStream file = new FileInputStream("ProgramData/" + type + ".txt");
+            ObjectInputStream in = new ObjectInputStream (file);
+            result = (ArrayList<T>) in.readObject (); // Method for deserialization of object
+            in.close();
+            file.close();
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
 }

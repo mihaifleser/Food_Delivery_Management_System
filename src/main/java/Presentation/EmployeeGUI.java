@@ -29,7 +29,6 @@ public class EmployeeGUI {
         int buttonWidth = width / 6;
         int buttonHeight = height / 8;
         frame=new JFrame("Employee");//creating instance of JFrame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JLabel titleLabel1 = new JLabel("Employee's Notification");
         titleLabel1.setFont(new Font(Font.SERIF,  Font.BOLD, 22));
