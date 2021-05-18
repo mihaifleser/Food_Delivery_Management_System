@@ -85,8 +85,8 @@ public class DeliveryService implements IDeliveryServiceProcessing{
     }
 
     @Override
-    public void logIn(String email, String password) {
-        loggedInAccount = new Account(email, password);
+    public void logIn(Account account) {
+        loggedInAccount = account;
     }
 
     public Account getLoggedInAccount()

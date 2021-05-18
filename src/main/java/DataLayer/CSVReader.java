@@ -13,37 +13,23 @@ import java.util.stream.Collectors;
 
 public class CSVReader {
 
+
     public static ArrayList<MenuItem> readData()
     {
         List<MenuItem> initialResult = new ArrayList<>();
-        BufferedReader csvReader = null;
-        try {
-            csvReader = new BufferedReader(new FileReader("products.csv"));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        String row = "";
-        boolean firstTime = true;
-        while (true) {
-            try {
-                if (((row = csvReader.readLine()) == null)) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            String[] data = row.split(",");
-            if(firstTime)
-            {
-                firstTime = false;
-                continue;
-            }
-            MenuItem newItem = new BaseProduct(data[0],Float.valueOf(data[1]),Integer.valueOf(data[2]),Integer.valueOf(data[3]), Integer.valueOf(data[4]),
-                    Integer.valueOf(data[5]), Integer.valueOf(data[6]));
-            initialResult.add(newItem);
-            // do something with the data
-        }
-        try {
-            csvReader.close();
-        } catch (IOException e) {
+        try(BufferedReader reader = new BufferedReader(new FileReader("products.csv")))
+        {
+            initialResult = reader.lines().skip(1).map(line -> line.split(",")).map(data -> new BaseProduct(
+                    data[0],
+                    Float.parseFloat(data[1]),
+                    Integer.parseInt(data[2]),
+                    Integer.parseInt(data[3]),
+                    Integer.parseInt(data[4]),
+                    Integer.parseInt(data[5]),
+                    Integer.parseInt(data[6])
+            )).collect(Collectors.toList());
+        } catch (Exception e)
+        {
             e.printStackTrace();
         }
 

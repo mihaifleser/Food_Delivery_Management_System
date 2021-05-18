@@ -119,15 +119,21 @@ public class Controller {
     {
         String email = clientGUI.getUserEmail();
         String password = clientGUI.getUserPassword();
-        if(deliveryService.getAccountWithEmail(email) != null)
+        Account foundAccount = deliveryService.getAccountWithEmail(email);
+        if(foundAccount != null)
         {
-            deliveryService.logIn(email, password);
-            clientGUI.getRegisterButton().setEnabled(false);
-            clientGUI.getLoginButton().setEnabled(false);
-            clientGUI.getPasswordTextArea().setEnabled(false);
-            clientGUI.getEmailTextArea().setEnabled(false);
-            clientGUI.getAccountLabel().setText(deliveryService.getLoggedInAccount().getEmail());
-            clientGUI.getLogOut().setEnabled(true);
+            if(deliveryService.getAccountWithEmail(email).getPassword().compareTo(password) == 0)
+            {
+                deliveryService.logIn(foundAccount);
+                clientGUI.getRegisterButton().setEnabled(false);
+                clientGUI.getLoginButton().setEnabled(false);
+                clientGUI.getPasswordTextArea().setEnabled(false);
+                clientGUI.getEmailTextArea().setEnabled(false);
+                clientGUI.getAccountLabel().setText(deliveryService.getLoggedInAccount().getEmail());
+                clientGUI.getLogOut().setEnabled(true);
+            }
+           else
+                JOptionPane.showMessageDialog(new JFrame(), "Wrong Password!");
         }
         else
         {

@@ -7,6 +7,6 @@ public interface IDeliveryServiceProcessing {
     void editProduct(Integer id, String title,Float rating, Integer calories, Integer proteins, Integer fat, Integer sodium, Integer price);
     void deleteProduct(String title);
     void addAccount(Account account);
-    void logIn(String email, String password);
+    void logIn(Account account);
     void logOut();
 }
