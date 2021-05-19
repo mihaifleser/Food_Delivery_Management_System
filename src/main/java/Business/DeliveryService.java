@@ -4,6 +4,7 @@ import DataLayer.CSVReader;
 import DataLayer.Serializator;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class DeliveryService implements IDeliveryServiceProcessing{
 
@@ -111,5 +112,40 @@ public class DeliveryService implements IDeliveryServiceProcessing{
     @Override
     public void logOut() {
         loggedInAccount = null;
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForTitle(ArrayList<MenuItem> items, String title) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getTitle().toLowerCase().contains(title.toLowerCase())).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForRating(ArrayList<MenuItem> items, Float rating) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getRating().equals(rating)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForCalories(ArrayList<MenuItem> items, Integer calories) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getCalories().equals(calories)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForProteins(ArrayList<MenuItem> items, Integer proteins) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getProteins().equals(proteins)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForFat(ArrayList<MenuItem> items, Integer fat) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getFat().equals(fat)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForSodium(ArrayList<MenuItem> items, Integer sodium) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getSodium().equals(sodium)).collect(Collectors.toList());
+    }
+
+    @Override
+    public ArrayList<MenuItem> searchForPrice(ArrayList<MenuItem> items, Integer price) {
+        return (ArrayList<MenuItem>) items.stream().filter(p -> p.getPrice().equals(price)).collect(Collectors.toList());
     }
 }

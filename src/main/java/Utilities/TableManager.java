@@ -17,7 +17,7 @@ public class TableManager {
         this.deliveryService = deliveryService;
     }
 
-    private void insertDataIntoTable(JTable table, ArrayList<MenuItem> data)
+    public void insertDataIntoTable(JTable table, ArrayList<MenuItem> data)
     {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);

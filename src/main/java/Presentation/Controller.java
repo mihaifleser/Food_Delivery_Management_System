@@ -41,6 +41,7 @@ public class Controller {
                 deliveryService.addProduct(newItem);
 
                 tableManager.updateTable(adminGUI.getProductsTable());
+                tableManager.updateTable(clientGUI.getProductsTable());
             }
             else
                 JOptionPane.showMessageDialog(new JFrame(), "Product already present!");
@@ -63,6 +64,7 @@ public class Controller {
                 deliveryService.deleteProduct(title);
             }
             tableManager.updateTable(adminGUI.getProductsTable());
+            tableManager.updateTable(clientGUI.getProductsTable());
 
         }catch (Exception exception)
         {
@@ -91,6 +93,7 @@ public class Controller {
                 }
                 deliveryService.addProduct(newMenu);
                 tableManager.updateTable(adminGUI.getProductsTable());
+                tableManager.updateTable(clientGUI.getProductsTable());
             }
             else
             {
@@ -141,6 +144,39 @@ public class Controller {
         }
     }
 
+    private void search()
+    {
+        String title = clientGUI.getSearchedTitle();
+        String rating = clientGUI.getSearchedRating();
+        String calories = clientGUI.getSearchedCalories();
+        String proteins = clientGUI.getSearchedProteins();
+        String fat = clientGUI.getSearchedFat();
+        String sodium = clientGUI.getSearchedSodium();
+        String price = clientGUI.getSearchedPrice();
+
+        System.out.println(rating);
+
+        ArrayList<MenuItem> items = deliveryService.getMenuItems();
+
+        if(title.compareTo("") != 0)
+            items = deliveryService.searchForTitle(items,title);
+        if(rating.compareTo("") != 0)
+            items = deliveryService.searchForRating(items,Float.valueOf(rating));
+        if(calories.compareTo("") != 0)
+            items = deliveryService.searchForCalories(items,Integer.valueOf(calories));
+        if(proteins.compareTo("") != 0)
+            items = deliveryService.searchForProteins(items,Integer.valueOf(proteins));
+        if(fat.compareTo("") != 0)
+            items = deliveryService.searchForFat(items,Integer.valueOf(fat));
+        if(sodium.compareTo("") != 0)
+            items = deliveryService.searchForSodium(items,Integer.valueOf(sodium));
+        if(price.compareTo("") != 0)
+            items = deliveryService.searchForPrice(items,Integer.valueOf(price));
+
+        tableManager.insertDataIntoTable(clientGUI.getProductsTable(),items);
+
+    }
+
     private void logOut()
     {
         deliveryService.logOut();
@@ -150,6 +186,13 @@ public class Controller {
         clientGUI.getEmailTextArea().setEnabled(true);
         clientGUI.getAccountLabel().setText("");
         clientGUI.getLogOut().setEnabled(false);
+    }
+
+    private void ImportFromCSV()
+    {
+        tableManager.importDataIntoTable(adminGUI.getProductsTable());
+        tableManager.updateTable(clientGUI.getProductsTable());
+
     }
 
     private void editSelectedProducts()
@@ -168,6 +211,7 @@ public class Controller {
                 deliveryService.editProduct(a, title,rating,calories,proteins,fat,sodium,price);
             }
             tableManager.updateTable(adminGUI.getProductsTable());
+            tableManager.updateTable(clientGUI.getProductsTable());
 
         }catch (Exception exception)
         {
@@ -184,8 +228,9 @@ public class Controller {
         deliveryService.importSerialisedProducts();
         deliveryService.importSerialisedAccounts();
         tableManager.updateTable(adminGUI.getProductsTable());
+        tableManager.updateTable(clientGUI.getProductsTable());
 
-        adminGUI.getImportButton().addActionListener(e -> tableManager.importDataIntoTable(adminGUI.getProductsTable()));
+        adminGUI.getImportButton().addActionListener(e -> ImportFromCSV());
         adminGUI.getFrame().addWindowListener(new java.awt.event.WindowAdapter()
         {
             @Override
@@ -202,5 +247,6 @@ public class Controller {
         clientGUI.getRegisterButton().addActionListener(e-> registerAccount());
         clientGUI.getLoginButton().addActionListener(e->logIn());
         clientGUI.getLogOut().addActionListener(e -> logOut());
+        clientGUI.getSearchButton().addActionListener(e-> search());
     }
 }

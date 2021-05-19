@@ -1,6 +1,7 @@
 package Presentation;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 public class ClientGUI {
@@ -8,10 +9,61 @@ public class ClientGUI {
     private JFrame frame;
     private JTextArea emailText;
     private JTextArea passwordText;
+
+    private JTextArea searchTitle;
+    private JTextArea searchRating;
+    private JTextArea searchCalories;
+    private JTextArea searchProtein;
+    private JTextArea searchFat;
+    private JTextArea searchSodium;
+    private JTextArea searchPrice;
+
     private JButton loginButton;
+    private JButton searchButton;
     private JButton registerButton;
     private JLabel accountLabel;
     private JButton logOut;
+
+    private JTable productsTable = new JTable();
+
+    public JTable getProductsTable()
+    {
+        return productsTable;
+    }
+
+    public JButton getSearchButton()
+    {
+        return searchButton;
+    }
+
+    public String getSearchedTitle()
+    {
+        return searchTitle.getText();
+    }
+    public String getSearchedRating()
+    {
+        return searchRating.getText();
+    }
+    public String getSearchedCalories()
+    {
+        return searchCalories.getText();
+    }
+    public String getSearchedProteins()
+    {
+        return searchProtein.getText();
+    }
+    public String getSearchedFat()
+    {
+        return searchFat.getText();
+    }
+    public String getSearchedSodium()
+    {
+        return searchSodium.getText();
+    }
+    public String getSearchedPrice()
+    {
+        return searchPrice.getText();
+    }
 
     public JButton getLogOut()
     {
@@ -113,6 +165,58 @@ public class ClientGUI {
         frame.add(logOut);
         logOut.setEnabled(false);
 
+        DefaultTableModel model = (DefaultTableModel) productsTable.getModel();
+        String[] columnNames = { "Title", "Rating", "Calories", "Proteins", "Fat", "Sodium", "Price" };
+        for (String str: columnNames)
+        {
+            model.addColumn(str);
+        }
+
+        JScrollPane sp2 = new JScrollPane(productsTable);
+        sp2.setBounds(emailText.getX() + labelWidth + 15,emailText.getY(),700,500);
+        frame.add(sp2);
+
+        searchTitle = new JTextArea();
+        searchTitle.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchTitle.setBounds(sp2.getX(), sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchTitle);
+
+        searchRating = new JTextArea();
+        searchRating.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchRating.setBounds(sp2.getX() + 100, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchRating);
+
+        searchCalories = new JTextArea();
+        searchCalories.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchCalories.setBounds(sp2.getX() + 200, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchCalories);
+
+        searchProtein = new JTextArea();
+        searchProtein.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchProtein.setBounds(sp2.getX() + 300, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchProtein);
+
+        searchFat = new JTextArea();
+        searchFat.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchFat.setBounds(sp2.getX() + 400, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchFat);
+
+        searchSodium = new JTextArea();
+        searchSodium.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchSodium.setBounds(sp2.getX() + 500, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchSodium);
+
+        searchPrice = new JTextArea();
+        searchPrice.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchPrice.setBounds(sp2.getX() + 600, sp2.getY() + 500 + 10,90,labelHeight / 2);
+        frame.add(searchPrice);
+
+        searchButton = new JButton("Search");
+        searchButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        searchButton.setBounds(leftMargin + buttonWidth, searchPrice.getY(),buttonWidth,searchPrice.getHeight());
+        searchButton.setBackground(buttonColor);
+        searchButton.setForeground(Color.white);
+        frame.add(searchButton);
 
         frame.setLayout(null);
         frame.getContentPane().setBackground(frameColor);

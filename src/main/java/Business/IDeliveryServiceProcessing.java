@@ -1,5 +1,7 @@
 package Business;
 
+import java.util.ArrayList;
+
 public interface IDeliveryServiceProcessing {
 
     void importProducts();
@@ -9,4 +11,11 @@ public interface IDeliveryServiceProcessing {
     void addAccount(Account account);
     void logIn(Account account);
     void logOut();
+    ArrayList<MenuItem> searchForTitle(ArrayList<MenuItem> items, String title);
+    ArrayList<MenuItem> searchForRating(ArrayList<MenuItem> items, Float rating);
+    ArrayList<MenuItem> searchForCalories(ArrayList<MenuItem> items, Integer calories);
+    ArrayList<MenuItem> searchForProteins(ArrayList<MenuItem> items, Integer proteins);
+    ArrayList<MenuItem> searchForFat(ArrayList<MenuItem> items, Integer fat);
+    ArrayList<MenuItem> searchForSodium(ArrayList<MenuItem> items, Integer sodium);
+    ArrayList<MenuItem> searchForPrice(ArrayList<MenuItem> items, Integer price);
 }
