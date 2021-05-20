@@ -21,10 +21,38 @@ public class ClientGUI {
     private JButton loginButton;
     private JButton searchButton;
     private JButton registerButton;
+    private JButton addButton;
+    private JButton removeButton;
+    private JButton orderButton;
     private JLabel accountLabel;
     private JButton logOut;
 
     private JTable productsTable = new JTable();
+
+    private JTextArea consoleText = new JTextArea();
+
+
+    public void addTextOnConsole(String s)
+    {
+        consoleText.setText(consoleText.getText() + s);
+    }
+    public void setTextOnConsole(String s)
+    {
+        consoleText.setText(s);
+    }
+
+    public JButton getAddButton()
+    {
+        return addButton;
+    }
+    public JButton getRemoveButton()
+    {
+        return removeButton;
+    }
+    public JButton getOrderButton()
+    {
+        return orderButton;
+    }
 
     public JTable getProductsTable()
     {
@@ -213,10 +241,47 @@ public class ClientGUI {
 
         searchButton = new JButton("Search");
         searchButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
-        searchButton.setBounds(leftMargin + buttonWidth, searchPrice.getY(),buttonWidth,searchPrice.getHeight());
+        searchButton.setBounds(searchTitle.getX(), searchPrice.getY() + 40,buttonWidth,searchPrice.getHeight());
         searchButton.setBackground(buttonColor);
         searchButton.setForeground(Color.white);
         frame.add(searchButton);
+
+        consoleText.setRows(6);
+        consoleText.setColumns(15);
+        consoleText.setBounds(leftMargin,registerButton.getY() + buttonHeight * 2, buttonWidth * 2, buttonHeight * 3);
+        consoleText.setEditable(false);
+        consoleText.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        JScrollPane scroll = new JScrollPane();
+        scroll.setBounds(leftMargin,registerButton.getY() + buttonHeight * 2, buttonWidth * 2, buttonHeight * 3);
+        scroll.getViewport().setBackground(Color.WHITE);
+        scroll.getViewport().add(consoleText);
+        scroll.setLocation(leftMargin,registerButton.getY() + buttonHeight * 2);
+        frame.add(scroll);
+
+        addButton = new JButton("Add");
+        addButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        addButton.setBounds(leftMargin, scroll.getY() + scroll.getHeight() + labelHeight,buttonWidth,buttonHeight);
+        addButton.setBackground(buttonColor);
+        addButton.setForeground(Color.white);
+        frame.add(addButton);
+        addButton.setEnabled(false);
+
+        removeButton = new JButton("Remove");
+        removeButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        removeButton.setBounds(leftMargin + buttonWidth, addButton.getY(),buttonWidth,buttonHeight);
+        removeButton.setBackground(buttonColor);
+        removeButton.setForeground(Color.white);
+        frame.add(removeButton);
+        removeButton.setEnabled(false);
+
+        orderButton = new JButton("Order");
+        orderButton.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        orderButton.setBounds(addButton.getX(), addButton.getY() + labelHeight, buttonWidth * 2,buttonHeight);
+        orderButton.setBackground(buttonColor);
+        orderButton.setForeground(Color.white);
+        frame.add(orderButton);
+        orderButton.setEnabled(false);
+
 
         frame.setLayout(null);
         frame.getContentPane().setBackground(frameColor);

@@ -14,9 +14,15 @@ public class AdminGUI{
     private JButton deleteButton;
     private JButton editButton;
     private JButton composeButton;
+    private JButton generateReports;
     private JTextArea newMenu;
 
     private JTable productsTable = new JTable();
+
+    public JButton getGenerateReports()
+    {
+        return generateReports;
+    }
 
     public JFrame getFrame()
     {
@@ -127,6 +133,13 @@ public class AdminGUI{
         newMenu.setBounds(composeButton.getX(), composeButton.getY() + buttonHeight,buttonWidth,labelHeight - labelHeight / 3);
         newMenu.setText("New Menu");
         frame.add(newMenu);
+
+        generateReports = new JButton("Generate Reports");
+        generateReports.setFont(new Font(Font.SERIF,  Font.PLAIN, 20));
+        generateReports.setBounds(leftMargin + buttonWidth * 2, newMenu.getY(),buttonWidth * 2,buttonHeight);
+        generateReports.setBackground(buttonColor);
+        generateReports.setForeground(Color.white);
+        frame.add(generateReports);
 
         frame.setLayout(null);
         frame.getContentPane().setBackground(frameColor);

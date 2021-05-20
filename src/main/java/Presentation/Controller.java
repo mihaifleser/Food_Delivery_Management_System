@@ -14,6 +14,7 @@ public class Controller {
     private ClientGUI clientGUI = new ClientGUI();
     private EmployeeGUI employeeGUI = new EmployeeGUI();
     private AddProductGUI addProductGUI = new AddProductGUI();
+    private GenerateReportsGUI generateReportsGUI = new GenerateReportsGUI();
     private DeliveryService deliveryService;
     private TableManager tableManager;
     public Controller()
@@ -134,6 +135,9 @@ public class Controller {
                 clientGUI.getEmailTextArea().setEnabled(false);
                 clientGUI.getAccountLabel().setText(deliveryService.getLoggedInAccount().getEmail());
                 clientGUI.getLogOut().setEnabled(true);
+                clientGUI.getAddButton().setEnabled(true);
+                clientGUI.getRemoveButton().setEnabled(true);
+                clientGUI.getOrderButton().setEnabled(true);
             }
            else
                 JOptionPane.showMessageDialog(new JFrame(), "Wrong Password!");
@@ -186,6 +190,9 @@ public class Controller {
         clientGUI.getEmailTextArea().setEnabled(true);
         clientGUI.getAccountLabel().setText("");
         clientGUI.getLogOut().setEnabled(false);
+        clientGUI.getAddButton().setEnabled(false);
+        clientGUI.getRemoveButton().setEnabled(false);
+        clientGUI.getOrderButton().setEnabled(false);
     }
 
     private void ImportFromCSV()
@@ -240,6 +247,7 @@ public class Controller {
             }
         });
         adminGUI.getAddButton().addActionListener((e -> addProductGUI.initialise()));
+        adminGUI.getGenerateReports().addActionListener(e->generateReportsGUI.initialise());
         addProductGUI.getAddButton().addActionListener(e -> addProduct());
         adminGUI.getDeleteButton().addActionListener(e->deleteSelectedProducts());
         adminGUI.getEditButton().addActionListener(e->editSelectedProducts());
