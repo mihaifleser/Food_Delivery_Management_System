@@ -226,6 +226,50 @@ public class Controller {
         }
     }
 
+    public void addProductsToOrder()
+    {
+        int[] rows = clientGUI.getProductsTable().getSelectedRows();
+        for(int a: rows)
+        {
+            String title = clientGUI.getProductsTable().getModel().getValueAt(a, 0).toString();
+            deliveryService.addItemInOrder(deliveryService.getItemWithTitle(title));
+        }
+        clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
+    }
+
+
+    public void removeItemFromOrder()
+    {
+        deliveryService.removeItemFromOrder();
+        clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
+    }
+
+    public void makeNewOrder()
+    {
+        deliveryService.createOrder();
+        clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
+        JOptionPane.showMessageDialog(new JFrame(), "Order sent!");
+    }
+
+    public void report1()
+    {
+        try {
+            deliveryService.generateReport1(Integer.valueOf(generateReportsGUI.getStartHour()), Integer.valueOf(generateReportsGUI.getEndHour()));
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "ERROR: You Must insert proper data!");
+        }
+    }
+
+    public void report2()
+    {
+        try {
+            deliveryService.generateReport2(Integer.valueOf(generateReportsGUI.getMinProducts()));
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "ERROR: You Must insert proper data!");
+        }
+    }
 
     public void start()
     {
@@ -234,6 +278,7 @@ public class Controller {
         employeeGUI.initialise();
         deliveryService.importSerialisedProducts();
         deliveryService.importSerialisedAccounts();
+        deliveryService.importSerialisedOrders();
         tableManager.updateTable(adminGUI.getProductsTable());
         tableManager.updateTable(clientGUI.getProductsTable());
 
@@ -244,6 +289,7 @@ public class Controller {
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
                 deliveryService.exportAccounts();
                 deliveryService.exportProducts();
+                deliveryService.exportSerialisedOrders();
             }
         });
         adminGUI.getAddButton().addActionListener((e -> addProductGUI.initialise()));
@@ -256,5 +302,11 @@ public class Controller {
         clientGUI.getLoginButton().addActionListener(e->logIn());
         clientGUI.getLogOut().addActionListener(e -> logOut());
         clientGUI.getSearchButton().addActionListener(e-> search());
+        clientGUI.getAddButton().addActionListener(e->addProductsToOrder());
+        clientGUI.getRemoveButton().addActionListener(e->removeItemFromOrder());
+        clientGUI.getOrderButton().addActionListener(e->makeNewOrder());
+        deliveryService.addObserver(employeeGUI);
+        generateReportsGUI.getReportButton1().addActionListener(e->report1());
+        generateReportsGUI.getReportButton2().addActionListener(e->report2());
     }
 }

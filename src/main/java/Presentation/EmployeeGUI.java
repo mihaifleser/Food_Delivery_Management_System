@@ -1,9 +1,12 @@
 package Presentation;
 
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Observable;
+import java.util.Observer;
 
-public class EmployeeGUI {
+public class EmployeeGUI implements Observer {
 
     private JFrame frame;
     private JTextArea consoleText = new JTextArea();
@@ -11,7 +14,7 @@ public class EmployeeGUI {
 
     public void addTextOnConsole(String s)
     {
-        consoleText.setText(consoleText.getText() + s);
+        consoleText.setText(consoleText.getText() +s  + "\n" + "\n");
     }
     public void setTextOnConsole(String s)
     {
@@ -52,5 +55,10 @@ public class EmployeeGUI {
         frame.setSize(width,height + 60);
         frame.setVisible(true);
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        addTextOnConsole(arg.toString());
     }
 }

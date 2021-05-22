@@ -11,22 +11,5 @@ public class App {
         Controller controller = new Controller();
         controller.start();
 
-
-        CompositeProduct a = new CompositeProduct("Salut");
-        BaseProduct b = new BaseProduct("BBB",8f,23,43,54,32,43);
-        BaseProduct c = new BaseProduct("CCC",12f,23,43,54,32,12);
-        a.addMenuProduct(b);
-        a.addMenuProduct(c);
-        MenuItem menuItem = a;
-
-        System.out.println(menuItem.computePrice());
-        System.out.println(menuItem.getRating());
-        ArrayList<MenuItem> products = ((CompositeProduct)menuItem).getProducts();
-        System.out.println(products.get(0).getTitle());
-
-
-        DeliveryService deliveryService = new DeliveryService();
-        deliveryService.importProducts();
-
     }
 }

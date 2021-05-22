@@ -18,4 +18,10 @@ public interface IDeliveryServiceProcessing {
     ArrayList<MenuItem> searchForFat(ArrayList<MenuItem> items, Integer fat);
     ArrayList<MenuItem> searchForSodium(ArrayList<MenuItem> items, Integer sodium);
     ArrayList<MenuItem> searchForPrice(ArrayList<MenuItem> items, Integer price);
+
+    void generateReport1(Integer startHour, Integer endHour);
+    void generateReport2(Integer minNumber);
+
+    void createOrder();
+
 }

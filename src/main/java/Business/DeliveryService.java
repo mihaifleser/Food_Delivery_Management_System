@@ -1,23 +1,66 @@
 package Business;
 
 import DataLayer.CSVReader;
+import DataLayer.FileWriterClass;
 import DataLayer.Serializator;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
-public class DeliveryService implements IDeliveryServiceProcessing{
+public class DeliveryService extends Observable implements IDeliveryServiceProcessing{
 
     private ArrayList<MenuItem> menuItems;
     private ArrayList<Account> accounts;
     private Account loggedInAccount;
+    private ArrayList<MenuItem> currentItemsInOrder;
+    private HashMap<Order, ArrayList<MenuItem>> allOrders;
 
     public DeliveryService()
     {
         menuItems = new ArrayList<>();
         accounts = new ArrayList<>();
+        currentItemsInOrder = new ArrayList<>();
+        allOrders = new HashMap<>();
         loggedInAccount = null;
     }
+
+    @Override
+    public void createOrder() {
+        Integer price = 0;
+        for(MenuItem item: currentItemsInOrder)
+            price += item.getPrice();
+        Order order = new Order(allOrders.size(),loggedInAccount.getEmail(), (GregorianCalendar) Calendar.getInstance(), price);
+
+        FileWriterClass.writeOrder(order,currentItemsInOrder);
+        setChanged();
+        notifyObservers(FileWriterClass.orderToString(order, currentItemsInOrder));
+        allOrders.put(order,new ArrayList<>(currentItemsInOrder));
+        currentItemsInOrder.clear();
+
+
+    }
+
+    public void addItemInOrder(MenuItem item)
+    {
+        currentItemsInOrder.add(item);
+    }
+
+    public void removeItemFromOrder()
+    {
+        currentItemsInOrder.remove(currentItemsInOrder.size() - 1);
+    }
+
+    public String itemsFromOrderToString()
+    {
+        String output = "";
+        for(MenuItem item: currentItemsInOrder)
+        {
+            output = output + item.getTitle() + "\n";
+        }
+        return output;
+    }
+
 
     @Override
     public void importProducts() {
@@ -30,22 +73,32 @@ public class DeliveryService implements IDeliveryServiceProcessing{
 
     public void importSerialisedProducts()
     {
-        this.menuItems = new Serializator<MenuItem>().deserialize("Products");
+        this.menuItems = new Serializator<MenuItem, Object>().deserialize("Products");
     }
 
     public void importSerialisedAccounts()
     {
-        this.accounts = new Serializator<Account>().deserialize("Accounts");
+        this.accounts = new Serializator<Account, Object>().deserialize("Accounts");
+    }
+
+    public void importSerialisedOrders()
+    {
+        this.allOrders = new Serializator<Order, MenuItem>().deserializeHashMap("Orders");
+    }
+
+    public void exportSerialisedOrders()
+    {
+        new Serializator<Order, MenuItem>().serializeHashMap(allOrders, "Orders");
     }
 
     public void exportAccounts()
     {
-        new Serializator<Account>().serialize(accounts,"Accounts");
+        new Serializator<Account, Object>().serialize(accounts,"Accounts");
     }
 
     public void exportProducts()
     {
-        new Serializator<MenuItem>().serialize(menuItems,"Products");
+        new Serializator<MenuItem, Object>().serialize(menuItems,"Products");
     }
 
     @Override
@@ -147,5 +200,43 @@ public class DeliveryService implements IDeliveryServiceProcessing{
     @Override
     public ArrayList<MenuItem> searchForPrice(ArrayList<MenuItem> items, Integer price) {
         return (ArrayList<MenuItem>) items.stream().filter(p -> p.getPrice().equals(price)).collect(Collectors.toList());
+    }
+
+    @Override
+    public void generateReport1(Integer startHour, Integer endHour) {
+
+        ArrayList<Order>localOrders =(ArrayList) allOrders.keySet().stream().filter(o->o.getDate().get(Calendar.HOUR_OF_DAY) <= endHour). collect(Collectors.toList());
+        localOrders =(ArrayList) localOrders.stream().filter(o->o.getDate().get(Calendar.HOUR_OF_DAY) >= startHour). collect(Collectors.toList());
+        FileWriterClass.writeReport1(localOrders);
+    }
+
+    @Override
+    public void generateReport2(Integer minNumber)
+    {
+        HashMap<MenuItem, Integer> occurence = new HashMap<>();
+        HashSet<MenuItem> products = new HashSet<>();
+        for(Order order: allOrders.keySet())
+        {
+            for(MenuItem menuItem: allOrders.get(order))
+            {
+                products.add(menuItem);
+            }
+        }
+        for(MenuItem menuItem: products)
+        {
+            occurence.put(menuItem, 0);
+        }
+        for(Order order: allOrders.keySet())
+        {
+            for(MenuItem menuItem: allOrders.get(order))
+            {
+                occurence.put(menuItem, occurence.get(menuItem) + 1);
+            }
+        }
+
+        HashMap<MenuItem, Integer> finalResult = new HashMap<>();
+        occurence.entrySet().stream().filter(entry->entry.getValue() > minNumber).forEach(entry-> finalResult.put(entry.getKey(), entry.getValue()));
+        FileWriterClass.writeReport2(finalResult);
+
     }
 }

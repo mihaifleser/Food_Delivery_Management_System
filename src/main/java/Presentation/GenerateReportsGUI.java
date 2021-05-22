@@ -8,15 +8,62 @@ public class GenerateReportsGUI {
     private JFrame frame = new JFrame("Generate Reports");
     private JTextArea startHour;
     private JTextArea endHour;
-    private JTextArea numberOfTimesOrder;
-    private JTextArea clientsNumber;
+    private JTextArea minProducts;
+    private JTextArea minClients;
     private JTextArea valueHigher;
     private JTextArea day;
 
-    private JButton report1;
-    private JButton report2;
-    private JButton report3;
-    private JButton report4;
+    private JButton report1 = new JButton("Report 1");;
+    private JButton report2 = new JButton("Report 2");;
+    private JButton report3 = new JButton("Report 3");;
+    private JButton report4 = new JButton("Report 4");;
+
+    public JButton getReportButton1()
+    {
+        return report1;
+    }
+
+    public JButton getReportButton2()
+    {
+        return report2;
+    }
+
+    public JButton getReportButton3()
+    {
+        return report3;
+    }
+
+    public JButton getReportButton4()
+    {
+        return report4;
+    }
+
+    public String getStartHour()
+    {
+        return startHour.getText();
+    }
+
+    public String getEndHour()
+    {
+        return endHour.getText();
+    }
+
+    public String getMinProducts()
+    {
+        return minProducts.getText();
+    }
+    public String getMinClients()
+    {
+        return minClients.getText();
+    }
+    public String getValueHigher()
+    {
+        return valueHigher.getText();
+    }
+    public String getDay()
+    {
+        return day.toString();
+    }
 
     public void initialise()
     {
@@ -55,7 +102,6 @@ public class GenerateReportsGUI {
         endHour.setBounds(leftMargin, labelHeight * 5,labelWidth,labelHeight / 2);
         frame.add(endHour);
 
-        report1 = new JButton("Report 1");
         report1.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
         report1.setBounds(leftMargin, labelHeight * 6,labelWidth,buttonHeight);
         report1.setBackground(buttonColor);
@@ -68,41 +114,41 @@ public class GenerateReportsGUI {
         numberOfTimesLabel.setBounds(startHourLabel.getX() + leftMargin + labelWidth, startHourLabel.getY(),labelWidth,labelHeight);
         frame.add(numberOfTimesLabel);
 
-        numberOfTimesOrder = new JTextArea();
-        numberOfTimesOrder.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
-        numberOfTimesOrder.setBounds(numberOfTimesLabel.getX(), labelHeight * 3,labelWidth,labelHeight / 2);
-        frame.add(numberOfTimesOrder);
+        minProducts = new JTextArea();
+        minProducts.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        minProducts.setBounds(numberOfTimesLabel.getX(), labelHeight * 3,labelWidth,labelHeight / 2);
+        frame.add(minProducts);
 
-        report2 = new JButton("Report 2");
+
         report2.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
         report2.setBounds(numberOfTimesLabel.getX(), labelHeight * 6,labelWidth,buttonHeight);
         report2.setBackground(buttonColor);
         report2.setForeground(Color.white);
         frame.add(report2);
 
-        JLabel clientsNumberLabel = new JLabel("Clients ordered more than: ");
-        clientsNumberLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
-        clientsNumberLabel.setBounds(numberOfTimesLabel.getX() + leftMargin + labelWidth, labelHeight * 2,labelWidth,labelHeight);
-        frame.add(clientsNumberLabel);
+        JLabel minClientsLabel = new JLabel("Clients ordered more than: ");
+        minClientsLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
+        minClientsLabel.setBounds(numberOfTimesLabel.getX() + leftMargin + labelWidth, labelHeight * 2,labelWidth,labelHeight);
+        frame.add(minClientsLabel);
 
-        clientsNumber = new JTextArea();
-        clientsNumber.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
-        clientsNumber.setBounds(clientsNumberLabel.getX(), labelHeight * 3,labelWidth,labelHeight / 2);
-        frame.add(clientsNumber);
+        minClients = new JTextArea();
+        minClients.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
+        minClients.setBounds(minClientsLabel.getX(), labelHeight * 3,labelWidth,labelHeight / 2);
+        frame.add(minClients);
 
         JLabel valueHigherLabel = new JLabel("Value Higher Than: ");
         valueHigherLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
-        valueHigherLabel.setBounds(clientsNumberLabel.getX(), labelHeight * 4,labelWidth,labelHeight);
+        valueHigherLabel.setBounds(minClientsLabel.getX(), labelHeight * 4,labelWidth,labelHeight);
         frame.add(valueHigherLabel);
 
         valueHigher = new JTextArea();
         valueHigher.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
-        valueHigher.setBounds(clientsNumberLabel.getX(), labelHeight * 5,labelWidth,labelHeight / 2);
+        valueHigher.setBounds(minClientsLabel.getX(), labelHeight * 5,labelWidth,labelHeight / 2);
         frame.add(valueHigher);
 
-        report3 = new JButton("Report 3");
+
         report3.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
-        report3.setBounds(clientsNumberLabel.getX(), labelHeight * 6,labelWidth,buttonHeight);
+        report3.setBounds(minClientsLabel.getX(), labelHeight * 6,labelWidth,buttonHeight);
         report3.setBackground(buttonColor);
         report3.setForeground(Color.white);
         frame.add(report3);
@@ -110,7 +156,7 @@ public class GenerateReportsGUI {
 
         JLabel dayLabel = new JLabel("Products in day: ");
         dayLabel.setFont(new Font(Font.SERIF,  Font.ITALIC, 16));
-        dayLabel.setBounds(clientsNumberLabel.getX() + leftMargin + labelWidth, startHourLabel.getY(),labelWidth,labelHeight);
+        dayLabel.setBounds(minClientsLabel.getX() + leftMargin + labelWidth, startHourLabel.getY(),labelWidth,labelHeight);
         frame.add(dayLabel);
 
         day = new JTextArea();
@@ -118,7 +164,7 @@ public class GenerateReportsGUI {
         day.setBounds(dayLabel.getX(), labelHeight * 3,labelWidth,labelHeight / 2);
         frame.add(day);
 
-        report4 = new JButton("Report 4");
+
         report4.setFont(new Font(Font.SERIF,  Font.PLAIN, 16));
         report4.setBounds(dayLabel.getX(), labelHeight * 6,labelWidth,buttonHeight);
         report4.setBackground(buttonColor);
