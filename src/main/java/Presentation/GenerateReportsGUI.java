@@ -62,7 +62,7 @@ public class GenerateReportsGUI {
     }
     public String getDay()
     {
-        return day.toString();
+        return day.getText();
     }
 
     public void initialise()

@@ -239,4 +239,59 @@ public class DeliveryService extends Observable implements IDeliveryServiceProce
         FileWriterClass.writeReport2(finalResult);
 
     }
+
+    @Override
+    public void generateReport3(Integer minClients, Integer valueHigher) {
+        HashMap<String, Integer> occurence = new HashMap<>();
+        HashSet<String> accounts = new HashSet<>();
+
+        for(Order order: allOrders.keySet())
+        {
+            accounts.add(order.getClientId());
+        }
+        for(String account: accounts)
+        {
+            occurence.put(account, 0);
+        }
+        for(Order order: allOrders.keySet())
+        {
+            if(order.getTotalPrice() > valueHigher)
+                occurence.put(order.getClientId(), occurence.get(order.getClientId()) + 1);
+        }
+
+        HashMap<String, Integer> finalResult = new HashMap<>();
+        occurence.entrySet().stream().filter(entry->entry.getValue() > minClients).forEach(entry-> finalResult.put(entry.getKey(), entry.getValue()));
+        FileWriterClass.writeReport3(finalResult);
+
+
+    }
+
+    @Override
+    public void generateReport4(Integer day) {
+        HashMap<MenuItem, Integer> occurence = new HashMap<>();
+        HashSet<MenuItem> products = new HashSet<>();
+
+        ArrayList<Order>localOrders =(ArrayList) allOrders.keySet().stream().filter(o->o.getDate().get(Calendar.DAY_OF_MONTH) == day). collect(Collectors.toList());
+
+        for(Order order: localOrders)
+        {
+            for(MenuItem menuItem: allOrders.get(order))
+            {
+                products.add(menuItem);
+            }
+        }
+        for(MenuItem menuItem: products)
+        {
+            occurence.put(menuItem, 0);
+        }
+        for(Order order: localOrders)
+        {
+            for(MenuItem menuItem: allOrders.get(order))
+            {
+                occurence.put(menuItem, occurence.get(menuItem) + 1);
+            }
+        }
+
+        FileWriterClass.writeReport4(occurence);
+    }
 }

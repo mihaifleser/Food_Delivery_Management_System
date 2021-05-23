@@ -78,4 +78,40 @@ public class FileWriterClass {
         }
     }
 
+    public static void writeReport3(HashMap<String, Integer> occurence)
+    {
+        try {
+            String output = "";
+            for(String account : occurence.keySet())
+            {
+                output = output + account + ": " + occurence.get(account)+" \n";
+            }
+            FileWriter myWriter = new FileWriter("Reports/" + "report3.txt");
+            myWriter.write(output);
+            myWriter.close();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeReport4(HashMap<MenuItem, Integer> occurence)
+    {
+        try {
+            String output = "";
+            for(MenuItem menuItem : occurence.keySet())
+            {
+                output = output + menuItem.getTitle() + ": " + occurence.get(menuItem)+" \n";
+            }
+            FileWriter myWriter = new FileWriter("Reports/" + "report4.txt");
+            myWriter.write(output);
+            myWriter.close();
+
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
 }

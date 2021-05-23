@@ -21,6 +21,8 @@ public interface IDeliveryServiceProcessing {
 
     void generateReport1(Integer startHour, Integer endHour);
     void generateReport2(Integer minNumber);
+    void generateReport3(Integer minClients, Integer valueHigher);
+    void generateReport4(Integer day);
 
     void createOrder();
 

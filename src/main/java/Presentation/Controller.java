@@ -271,6 +271,27 @@ public class Controller {
         }
     }
 
+    public void report3()
+    {
+        try {
+            deliveryService.generateReport3(Integer.valueOf(generateReportsGUI.getMinClients()), Integer.valueOf(generateReportsGUI.getValueHigher()));
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "ERROR: You Must insert proper data!");
+        }
+    }
+
+    public void report4()
+    {
+        try {
+            deliveryService.generateReport4(Integer.valueOf(generateReportsGUI.getDay()));
+        }catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "ERROR: You Must insert proper data!");
+        }
+    }
+
+
     public void start()
     {
         adminGUI.initialise();
@@ -308,5 +329,7 @@ public class Controller {
         deliveryService.addObserver(employeeGUI);
         generateReportsGUI.getReportButton1().addActionListener(e->report1());
         generateReportsGUI.getReportButton2().addActionListener(e->report2());
+        generateReportsGUI.getReportButton3().addActionListener(e->report3());
+        generateReportsGUI.getReportButton4().addActionListener(e->report4());
     }
 }
