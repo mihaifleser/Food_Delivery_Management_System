@@ -1,0 +1,7 @@
+Order: 4
+Client: Palti
+Date: Sat May 22 17:04:33 EEST 2021
+items: 
+Meniul Zilei 1
+For a total of: 
+175

@@ -1,0 +1,9 @@
+Order: 7
+Client: Mihai
+Date: Sat May 22 18:47:48 EEST 2021
+items: 
+Meniul Zilei 1
+Meniul Zilei 2
+Meniul Zilei 3
+For a total of: 
+420

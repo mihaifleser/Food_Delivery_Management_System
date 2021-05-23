@@ -2,6 +2,11 @@ package Business;
 
 import java.io.Serializable;
 
+/**
+ * Class used to store the information about the items from the menu
+ */
+
+
 public abstract class MenuItem implements Serializable {
 
     protected String title;

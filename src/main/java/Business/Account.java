@@ -2,6 +2,10 @@ package Business;
 
 import java.io.Serializable;
 
+/**
+ * Class used to store information about the accounts of the clients
+ */
+
 public class Account implements Serializable {
     private String email;
     private String password;

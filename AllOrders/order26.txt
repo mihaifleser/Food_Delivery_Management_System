@@ -1,0 +1,8 @@
+Order: 26
+Client: Mihai
+Date: Sun May 23 21:04:00 EEST 2021
+items: 
+Pastrav
+Meniul Zilei 1
+For a total of: 
+207

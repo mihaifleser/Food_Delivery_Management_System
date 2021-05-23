@@ -1,0 +1,9 @@
+Order: 0
+Client: Mihai
+Date: Sat May 22 16:59:30 EEST 2021
+items: 
+Spicy Pickled Shallots 
+Ethiopian Spice Tea 
+Smoked Caviar and Hummus on Pita Toasts 
+For a total of: 
+206

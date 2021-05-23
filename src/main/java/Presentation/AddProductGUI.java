@@ -3,6 +3,10 @@ package Presentation;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * GUI for adding a new Product by the administrator.
+ */
+
 public class AddProductGUI {
 
     private JFrame frame = new JFrame("Insert new Product");

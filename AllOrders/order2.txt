@@ -1,0 +1,8 @@
+Order: 2
+Client: Prese
+Date: Sat May 22 17:00:22 EEST 2021
+items: 
+Smoked Caviar and Hummus on Pita Toasts 
+Barbecued Shrimp 
+For a total of: 
+150

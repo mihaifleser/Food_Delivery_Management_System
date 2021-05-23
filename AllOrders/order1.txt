@@ -1,0 +1,7 @@
+Order: 1
+Client: Prese
+Date: Sat May 22 17:00:09 EEST 2021
+items: 
+Quick & Spicy Asian Pickles 
+For a total of: 
+48

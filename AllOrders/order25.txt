@@ -1,0 +1,9 @@
+Order: 25
+Client: Prese
+Date: Sun May 23 20:01:01 EEST 2021
+items: 
+Cauliflower-Leek Purée 
+Arugula Salad with Heirloom Tomatoes and Red Onion 
+Pui fript
+For a total of: 
+106

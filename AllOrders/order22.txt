@@ -1,0 +1,9 @@
+Order: 22
+Client: Mihai
+Date: Sun May 23 19:55:47 EEST 2021
+items: 
+Shrimp Sates with Spiced Pistachio Chutney 
+Arugula Salad with Heirloom Tomatoes and Red Onion 
+Classic Salad 
+For a total of: 
+148

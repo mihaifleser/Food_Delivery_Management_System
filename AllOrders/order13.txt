@@ -1,0 +1,8 @@
+Order: 13
+Client: Prese
+Date: Sun May 23 14:08:41 EEST 2021
+items: 
+Zinfandel Beef Stock 
+Meniul Zilei 1
+For a total of: 
+203

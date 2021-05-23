@@ -3,6 +3,10 @@ package Business;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
+/**
+ * Class used to store the information about the orders performed by the clients.
+ */
+
 public class Order implements Serializable {
     private Integer orderId;
     private String clientId;

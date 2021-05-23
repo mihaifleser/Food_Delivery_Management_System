@@ -1,0 +1,10 @@
+Order: 11
+Client: Palti
+Date: Sat May 22 20:00:24 EEST 2021
+items: 
+Smoked Caviar and Hummus on Pita Toasts 
+Cilantro-Tomato Salsa 
+The Original Three-Ingredient Rub 
+Meniul Zilei 2
+For a total of: 
+274

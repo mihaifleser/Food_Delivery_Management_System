@@ -3,6 +3,11 @@ package Presentation;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * GUI used by the administrator to generate the reports.
+ */
+
 public class GenerateReportsGUI {
 
     private JFrame frame = new JFrame("Generate Reports");

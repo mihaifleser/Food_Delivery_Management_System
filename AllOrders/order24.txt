@@ -1,0 +1,9 @@
+Order: 24
+Client: Prese
+Date: Sun May 23 20:00:09 EEST 2021
+items: 
+Arugula Salad with Heirloom Tomatoes and Red Onion 
+Red Pepper Sauce 
+Classic Salad 
+For a total of: 
+132

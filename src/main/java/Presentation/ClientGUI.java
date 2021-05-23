@@ -4,6 +4,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
+
+/**
+ * Client GUI.
+ */
 public class ClientGUI {
 
     private JFrame frame;

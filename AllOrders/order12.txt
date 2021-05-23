@@ -1,0 +1,9 @@
+Order: 12
+Client: Bia
+Date: Sat May 22 20:02:18 EEST 2021
+items: 
+Spicy Pickled Shallots 
+Smoked Caviar and Hummus on Pita Toasts 
+Cilantro-Tomato Salsa 
+For a total of: 
+189

@@ -8,6 +8,9 @@ import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class used to manage tables from the GUI.
+ */
 public class TableManager {
 
 
@@ -17,6 +20,11 @@ public class TableManager {
         this.deliveryService = deliveryService;
     }
 
+    /**
+     * Inserts data into a table
+     * @param table
+     * @param data
+     */
     public void insertDataIntoTable(JTable table, ArrayList<MenuItem> data)
     {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
@@ -36,6 +44,11 @@ public class TableManager {
         }
     }
 
+    /**
+     * Imports data from the deliveryService class to a table
+     * @param table
+     */
+
     public void importDataIntoTable(JTable table)
     {
         deliveryService.importProducts();
@@ -43,6 +56,10 @@ public class TableManager {
         insertDataIntoTable(table,data);
     }
 
+    /**
+     * Updates a table with data from the deliveryService class.
+     * @param table
+     */
     public void updateTable(JTable table)
     {
         ArrayList<MenuItem> data = deliveryService.getMenuItems();

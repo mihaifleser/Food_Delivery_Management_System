@@ -1,0 +1,4 @@
+Palti: 2 
+Prese: 1 
+Mihai: 6 
+Bia: 3 

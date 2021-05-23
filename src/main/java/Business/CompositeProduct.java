@@ -2,6 +2,10 @@ package Business;
 
 import java.util.ArrayList;
 
+/**
+ * Class used to compose a new menu Item from other menu Items.
+ */
+
 public class CompositeProduct extends MenuItem {
 
     private ArrayList<MenuItem> products;

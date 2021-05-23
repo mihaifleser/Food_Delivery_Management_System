@@ -5,6 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.lang.reflect.Field;
 
+/**
+ * Administrator GUI.
+ */
 public class AdminGUI{
 
 

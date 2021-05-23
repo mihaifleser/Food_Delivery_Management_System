@@ -8,9 +8,18 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Writes data in specific files.
+ */
+
 public class FileWriterClass {
 
-
+    /**
+     * Method for transforming an order to a string.
+     * @param order
+     * @param items
+     * @return
+     */
     public static String orderToString(Order order, ArrayList<MenuItem> items)
     {
         String output = "Order: " + order.getOrderId() + "\n" +
@@ -29,6 +38,12 @@ public class FileWriterClass {
         return output;
     }
 
+    /**
+     * Method for writing an order in a txt file.
+     * @param order
+     * @param items
+     */
+
     public static void writeOrder(Order order, ArrayList<MenuItem> items)
     {
         try {
@@ -42,6 +57,10 @@ public class FileWriterClass {
         }
     }
 
+    /**
+     * Method for writing report 1 performed by the Administrator
+     * @param orders
+     */
     public static void writeReport1(ArrayList<Order> orders)
     {
         try {
@@ -60,6 +79,10 @@ public class FileWriterClass {
         }
     }
 
+    /**
+     * Method for writing report 2 performed by the Administrator
+     * @param occurence
+     */
     public static void writeReport2(HashMap<MenuItem, Integer> occurence)
     {
         try {
@@ -78,6 +101,10 @@ public class FileWriterClass {
         }
     }
 
+    /**
+     * Method for writing report 3 performed by the Administrator
+     * @param occurence
+     */
     public static void writeReport3(HashMap<String, Integer> occurence)
     {
         try {
@@ -95,6 +122,11 @@ public class FileWriterClass {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Method for writing report 4 performed by the Administrator
+     * @param occurence
+     */
 
     public static void writeReport4(HashMap<MenuItem, Integer> occurence)
     {

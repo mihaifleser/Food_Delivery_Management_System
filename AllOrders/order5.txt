@@ -1,0 +1,8 @@
+Order: 5
+Client: Bia
+Date: Sat May 22 17:05:26 EEST 2021
+items: 
+Shrimp Sates with Spiced Pistachio Chutney 
+Meniul Zilei 2
+For a total of: 
+194

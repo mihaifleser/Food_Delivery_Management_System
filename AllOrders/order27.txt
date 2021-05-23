@@ -1,0 +1,8 @@
+Order: 27
+Client: Mihai
+Date: Sun May 23 21:05:02 EEST 2021
+items: 
+Red and Green Tomato Salsa 
+Meniul Zilei 2
+For a total of: 
+175

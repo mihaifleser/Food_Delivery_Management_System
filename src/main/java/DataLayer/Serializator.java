@@ -8,7 +8,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * Class used to serialize and deserialize data.
+ * @param <T>
+ * @param <V>
+ */
 public class Serializator <T, V>{
+
+    /**
+     * Serialises an array
+     * @param array
+     * @param type
+     */
 
     public void serialize(ArrayList<T> array, String type)
     {
@@ -23,6 +34,12 @@ public class Serializator <T, V>{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Deserialises an array
+     * @param type
+     * @return
+     */
 
     public ArrayList<T> deserialize(String type)
     {
@@ -42,6 +59,11 @@ public class Serializator <T, V>{
         return result;
     }
 
+    /**
+     * Deserialises a Hash Map
+     * @param type
+     * @return
+     */
     public HashMap<T,ArrayList<V>> deserializeHashMap(String type)
     {
         HashMap<T, ArrayList<V>> result = new HashMap<>();
@@ -60,6 +82,11 @@ public class Serializator <T, V>{
         return result;
     }
 
+    /**
+     * Serialises a hash map.
+     * @param hashMap
+     * @param type
+     */
     public void serializeHashMap(HashMap<T, ArrayList<V>> hashMap, String type)
     {
         try {

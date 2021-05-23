@@ -7,7 +7,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-
+/**
+ * Class used to set actions on the buttons from the GUI.
+ */
 public class Controller {
 
     private AdminGUI adminGUI = new AdminGUI();
@@ -23,6 +25,9 @@ public class Controller {
         tableManager = new TableManager(deliveryService);
     }
 
+    /**
+     * Admin adds a new product in the database.
+     */
 
     private void addProduct()
     {
@@ -54,6 +59,10 @@ public class Controller {
 
     }
 
+    /**
+     * Admin deletes the selected products.
+     */
+
     private void deleteSelectedProducts()
     {
         try {
@@ -73,6 +82,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Admin composes a new menu.
+     */
     private void composeNewMenu()
     {
             int[] rows = adminGUI.getProductsTable().getSelectedRows();
@@ -103,6 +115,9 @@ public class Controller {
 
     }
 
+    /**
+     * Clients registers a new account in the application.
+     */
     private void registerAccount()
     {
         String email = clientGUI.getUserEmail();
@@ -118,6 +133,10 @@ public class Controller {
             JOptionPane.showMessageDialog(new JFrame(), "Account created!");
         }
     }
+
+    /**
+     * Client logs in the application.
+     */
 
     private void logIn()
     {
@@ -148,6 +167,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Client searches in the list of products.
+     */
     private void search()
     {
         String title = clientGUI.getSearchedTitle();
@@ -181,6 +203,10 @@ public class Controller {
 
     }
 
+    /**
+     * Client logs out of the applications.
+     */
+
     private void logOut()
     {
         deliveryService.logOut();
@@ -202,6 +228,9 @@ public class Controller {
 
     }
 
+    /**
+     * Admin edits the selected products.
+     */
     private void editSelectedProducts()
     {
         try {
@@ -226,6 +255,9 @@ public class Controller {
         }
     }
 
+    /**
+     * Client adds product in the cart.
+     */
     public void addProductsToOrder()
     {
         int[] rows = clientGUI.getProductsTable().getSelectedRows();
@@ -237,19 +269,37 @@ public class Controller {
         clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
     }
 
-
+    /**
+     * Client removes an item from the cart.
+     */
     public void removeItemFromOrder()
     {
         deliveryService.removeItemFromOrder();
         clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
     }
 
+    /**
+     * Clients makes a new order.
+     */
+
     public void makeNewOrder()
     {
-        deliveryService.createOrder();
-        clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
-        JOptionPane.showMessageDialog(new JFrame(), "Order sent!");
+        if(deliveryService.itemsFromOrderToString().equals(""))
+        {
+            JOptionPane.showMessageDialog(new JFrame(), "No items in cart!");
+        }
+        else
+        {
+            deliveryService.createOrder();
+            clientGUI.setTextOnConsole(deliveryService.itemsFromOrderToString());
+            JOptionPane.showMessageDialog(new JFrame(), "Order sent!");
+        }
+
     }
+
+    /**
+     * First report done by the Admin.
+     */
 
     public void report1()
     {
@@ -261,6 +311,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Second report done by the Admin.
+     */
+
     public void report2()
     {
         try {
@@ -271,6 +325,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Third report done by the Admin.
+     */
+
     public void report3()
     {
         try {
@@ -280,6 +338,10 @@ public class Controller {
             JOptionPane.showMessageDialog(new JFrame(), "ERROR: You Must insert proper data!");
         }
     }
+
+    /**
+     * Forth report done by the Admin.
+     */
 
     public void report4()
     {
